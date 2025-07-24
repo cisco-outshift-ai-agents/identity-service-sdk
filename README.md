@@ -1,6 +1,6 @@
 # Agent Identity Service SDK
 
-[![Lint](https://github.com/cisco-eti/identity-service-sdk/actions/workflows/lint.yml/badge.svg?branch=main)](https://github.com/marketplace/actions/super-linter)
+[![Lint](https://github.com/cisco-outshift-ai-agents/identity-service-sdk/actions/workflows/lint.yml/badge.svg?branch=main)](https://github.com/marketplace/actions/super-linter)
 [![Contributor-Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-fbab2c.svg)](CODE_OF_CONDUCT.md)
 
 <p align="center">
@@ -24,7 +24,7 @@ The `Agent Identity Service` provides a set of SDKs to interact with Agentic Ser
 
 ## Roadmap
 
-See the [open issues](https://github.com/cisco-eti/identity-service-sdk/issues) for a list
+See the [open issues](https://github.com/cisco-outshift-ai-agents/identity-service-sdk/issues) for a list
 of proposed features (and known issues).
 
 ## Contributing
