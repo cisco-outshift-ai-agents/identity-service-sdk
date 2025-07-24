@@ -1,0 +1,11 @@
+# Copyright 2025 AGNTCY Contributors (https://github.com/agntcy)
+# SPDX-License-Identifier: Apache-2.0
+
+---
+default_stages: [pre-commit, pre-push]
+repos:
+  - repo: https://github.com/google/addlicense
+    rev: 3d89fa361d3965c9b4a0217057236c0713ed75e6
+    hooks:
+      - id: addlicense # Add license header to files
+        args: ["-c", "Copyright 2025 Cisco Systems, Inc. and its affiliates", "-l", "Apache-2.0", "."]
