@@ -31,27 +31,27 @@ class AuthServiceStub(object):
             channel: A grpc.Channel.
         """
         self.AppInfo = channel.unary_unary(
-                '/agoutshift.identity.service.v1alpha1.AuthService/AppInfo',
+                '/outshift.identity.service.v1alpha1.AuthService/AppInfo',
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
                 response_deserializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_auth__service__pb2.AppInfoResponse.FromString,
                 _registered_method=True)
         self.Authorize = channel.unary_unary(
-                '/agoutshift.identity.service.v1alpha1.AuthService/Authorize',
+                '/outshift.identity.service.v1alpha1.AuthService/Authorize',
                 request_serializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_auth__service__pb2.AuthorizeRequest.SerializeToString,
                 response_deserializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_auth__service__pb2.AuthorizeResponse.FromString,
                 _registered_method=True)
         self.Token = channel.unary_unary(
-                '/agoutshift.identity.service.v1alpha1.AuthService/Token',
+                '/outshift.identity.service.v1alpha1.AuthService/Token',
                 request_serializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_auth__service__pb2.TokenRequest.SerializeToString,
                 response_deserializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_auth__service__pb2.TokenResponse.FromString,
                 _registered_method=True)
         self.ExtAuthz = channel.unary_unary(
-                '/agoutshift.identity.service.v1alpha1.AuthService/ExtAuthz',
+                '/outshift.identity.service.v1alpha1.AuthService/ExtAuthz',
                 request_serializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_auth__service__pb2.ExtAuthzRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 _registered_method=True)
         self.ApproveToken = channel.unary_unary(
-                '/agoutshift.identity.service.v1alpha1.AuthService/ApproveToken',
+                '/outshift.identity.service.v1alpha1.AuthService/ApproveToken',
                 request_serializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_auth__service__pb2.ApproveTokenRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 _registered_method=True)
@@ -126,9 +126,9 @@ def add_AuthServiceServicer_to_server(servicer, server):
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'agoutshift.identity.service.v1alpha1.AuthService', rpc_method_handlers)
+            'outshift.identity.service.v1alpha1.AuthService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('agoutshift.identity.service.v1alpha1.AuthService', rpc_method_handlers)
+    server.add_registered_method_handlers('outshift.identity.service.v1alpha1.AuthService', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
@@ -150,7 +150,7 @@ class AuthService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/agoutshift.identity.service.v1alpha1.AuthService/AppInfo',
+            '/outshift.identity.service.v1alpha1.AuthService/AppInfo',
             google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_auth__service__pb2.AppInfoResponse.FromString,
             options,
@@ -177,7 +177,7 @@ class AuthService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/agoutshift.identity.service.v1alpha1.AuthService/Authorize',
+            '/outshift.identity.service.v1alpha1.AuthService/Authorize',
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_auth__service__pb2.AuthorizeRequest.SerializeToString,
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_auth__service__pb2.AuthorizeResponse.FromString,
             options,
@@ -204,7 +204,7 @@ class AuthService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/agoutshift.identity.service.v1alpha1.AuthService/Token',
+            '/outshift.identity.service.v1alpha1.AuthService/Token',
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_auth__service__pb2.TokenRequest.SerializeToString,
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_auth__service__pb2.TokenResponse.FromString,
             options,
@@ -231,7 +231,7 @@ class AuthService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/agoutshift.identity.service.v1alpha1.AuthService/ExtAuthz',
+            '/outshift.identity.service.v1alpha1.AuthService/ExtAuthz',
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_auth__service__pb2.ExtAuthzRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options,
@@ -258,7 +258,7 @@ class AuthService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/agoutshift.identity.service.v1alpha1.AuthService/ApproveToken',
+            '/outshift.identity.service.v1alpha1.AuthService/ApproveToken',
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_auth__service__pb2.ApproveTokenRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options,

@@ -31,12 +31,12 @@ class BadgeServiceStub(object):
             channel: A grpc.Channel.
         """
         self.IssueBadge = channel.unary_unary(
-                '/agoutshift.identity.service.v1alpha1.BadgeService/IssueBadge',
+                '/outshift.identity.service.v1alpha1.BadgeService/IssueBadge',
                 request_serializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_badge__service__pb2.IssueBadgeRequest.SerializeToString,
                 response_deserializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_badge__pb2.Badge.FromString,
                 _registered_method=True)
         self.VerifyBadge = channel.unary_unary(
-                '/agoutshift.identity.service.v1alpha1.BadgeService/VerifyBadge',
+                '/outshift.identity.service.v1alpha1.BadgeService/VerifyBadge',
                 request_serializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_badge__service__pb2.VerifyBadgeRequest.SerializeToString,
                 response_deserializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_badge__pb2.VerificationResult.FromString,
                 _registered_method=True)
@@ -75,9 +75,9 @@ def add_BadgeServiceServicer_to_server(servicer, server):
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'agoutshift.identity.service.v1alpha1.BadgeService', rpc_method_handlers)
+            'outshift.identity.service.v1alpha1.BadgeService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('agoutshift.identity.service.v1alpha1.BadgeService', rpc_method_handlers)
+    server.add_registered_method_handlers('outshift.identity.service.v1alpha1.BadgeService', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
@@ -99,7 +99,7 @@ class BadgeService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/agoutshift.identity.service.v1alpha1.BadgeService/IssueBadge',
+            '/outshift.identity.service.v1alpha1.BadgeService/IssueBadge',
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_badge__service__pb2.IssueBadgeRequest.SerializeToString,
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_badge__pb2.Badge.FromString,
             options,
@@ -126,7 +126,7 @@ class BadgeService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/agoutshift.identity.service.v1alpha1.BadgeService/VerifyBadge',
+            '/outshift.identity.service.v1alpha1.BadgeService/VerifyBadge',
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_badge__service__pb2.VerifyBadgeRequest.SerializeToString,
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_badge__pb2.VerificationResult.FromString,
             options,
