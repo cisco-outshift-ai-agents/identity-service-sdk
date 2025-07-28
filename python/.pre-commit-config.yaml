@@ -23,7 +23,7 @@ repos:
     - id: ruff
       args: [--fix]
       types_or: [ python, pyi, jupyter ]
-      files: agntcyiden
+      files: identityservice
     - id: ruff-format
       types_or: [ python, pyi, jupyter ]
 
