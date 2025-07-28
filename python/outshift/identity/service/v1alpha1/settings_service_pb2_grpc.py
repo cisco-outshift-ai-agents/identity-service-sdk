@@ -31,17 +31,17 @@ class SettingsServiceStub(object):
             channel: A grpc.Channel.
         """
         self.GetSettings = channel.unary_unary(
-                '/agoutshift.identity.service.v1alpha1.SettingsService/GetSettings',
+                '/outshift.identity.service.v1alpha1.SettingsService/GetSettings',
                 request_serializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_settings__service__pb2.GetSettingsRequest.SerializeToString,
                 response_deserializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_settings__pb2.Settings.FromString,
                 _registered_method=True)
         self.SetApiKey = channel.unary_unary(
-                '/agoutshift.identity.service.v1alpha1.SettingsService/SetApiKey',
+                '/outshift.identity.service.v1alpha1.SettingsService/SetApiKey',
                 request_serializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_settings__service__pb2.SetApiKeyRequest.SerializeToString,
                 response_deserializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_settings__pb2.ApiKey.FromString,
                 _registered_method=True)
         self.SetIssuer = channel.unary_unary(
-                '/agoutshift.identity.service.v1alpha1.SettingsService/SetIssuer',
+                '/outshift.identity.service.v1alpha1.SettingsService/SetIssuer',
                 request_serializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_settings__service__pb2.SetIssuerRequest.SerializeToString,
                 response_deserializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_settings__pb2.IssuerSettings.FromString,
                 _registered_method=True)
@@ -92,9 +92,9 @@ def add_SettingsServiceServicer_to_server(servicer, server):
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'agoutshift.identity.service.v1alpha1.SettingsService', rpc_method_handlers)
+            'outshift.identity.service.v1alpha1.SettingsService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('agoutshift.identity.service.v1alpha1.SettingsService', rpc_method_handlers)
+    server.add_registered_method_handlers('outshift.identity.service.v1alpha1.SettingsService', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
@@ -116,7 +116,7 @@ class SettingsService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/agoutshift.identity.service.v1alpha1.SettingsService/GetSettings',
+            '/outshift.identity.service.v1alpha1.SettingsService/GetSettings',
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_settings__service__pb2.GetSettingsRequest.SerializeToString,
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_settings__pb2.Settings.FromString,
             options,
@@ -143,7 +143,7 @@ class SettingsService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/agoutshift.identity.service.v1alpha1.SettingsService/SetApiKey',
+            '/outshift.identity.service.v1alpha1.SettingsService/SetApiKey',
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_settings__service__pb2.SetApiKeyRequest.SerializeToString,
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_settings__pb2.ApiKey.FromString,
             options,
@@ -170,7 +170,7 @@ class SettingsService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/agoutshift.identity.service.v1alpha1.SettingsService/SetIssuer',
+            '/outshift.identity.service.v1alpha1.SettingsService/SetIssuer',
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_settings__service__pb2.SetIssuerRequest.SerializeToString,
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_settings__pb2.IssuerSettings.FromString,
             options,

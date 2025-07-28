@@ -28,14 +28,14 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n:outshift/identity/service/shared/v1alpha1/pagination.proto\x12+agoutshift.identity.service.shared.v1alpha1\"\xa4\x01\n\rPagedResponse\x12 \n\tnext_page\x18\x01 \x01(\x05H\x00R\x08nextPage\x88\x01\x01\x12\'\n\rhas_next_page\x18\x02 \x01(\x08H\x01R\x0bhasNextPage\x88\x01\x01\x12\x14\n\x05total\x18\x03 \x01(\x03R\x05total\x12\x12\n\x04size\x18\x04 \x01(\x05R\x04sizeB\x0c\n\n_next_pageB\x10\n\x0e_has_next_pageB\x8d\x03\n/com.agoutshift.identity.service.shared.v1alpha1B\x0fPaginationProtoP\x01Zxgithub.com/outshift/identity-service/api/server/outshift/identity/service/shared/v1alpha1;identity_service_shared_sdk_go\xa2\x02\x04\x41ISS\xaa\x02+Agoutshift.Identity.Service.Shared.V1alpha1\xca\x02+Agoutshift\\Identity\\Service\\Shared\\V1alpha1\xe2\x02\x37\x41goutshift\\Identity\\Service\\Shared\\V1alpha1\\GPBMetadata\xea\x02/Agoutshift::Identity::Service::Shared::V1alpha1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n:outshift/identity/service/shared/v1alpha1/pagination.proto\x12)outshift.identity.service.shared.v1alpha1\"\xa4\x01\n\rPagedResponse\x12 \n\tnext_page\x18\x01 \x01(\x05H\x00R\x08nextPage\x88\x01\x01\x12\'\n\rhas_next_page\x18\x02 \x01(\x08H\x01R\x0bhasNextPage\x88\x01\x01\x12\x14\n\x05total\x18\x03 \x01(\x03R\x05total\x12\x12\n\x04size\x18\x04 \x01(\x05R\x04sizeB\x0c\n\n_next_pageB\x10\n\x0e_has_next_pageB\x83\x03\n-com.outshift.identity.service.shared.v1alpha1B\x0fPaginationProtoP\x01Zxgithub.com/outshift/identity-service/api/server/outshift/identity/service/shared/v1alpha1;identity_service_shared_sdk_go\xa2\x02\x04OISS\xaa\x02)Outshift.Identity.Service.Shared.V1alpha1\xca\x02)Outshift\\Identity\\Service\\Shared\\V1alpha1\xe2\x02\x35Outshift\\Identity\\Service\\Shared\\V1alpha1\\GPBMetadata\xea\x02-Outshift::Identity::Service::Shared::V1alpha1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'outshift.identity.service.shared.v1alpha1.pagination_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['DESCRIPTOR']._options = None
-  _globals['DESCRIPTOR']._serialized_options = b'\n/com.agoutshift.identity.service.shared.v1alpha1B\017PaginationProtoP\001Zxgithub.com/outshift/identity-service/api/server/outshift/identity/service/shared/v1alpha1;identity_service_shared_sdk_go\242\002\004AISS\252\002+Agoutshift.Identity.Service.Shared.V1alpha1\312\002+Agoutshift\\Identity\\Service\\Shared\\V1alpha1\342\0027Agoutshift\\Identity\\Service\\Shared\\V1alpha1\\GPBMetadata\352\002/Agoutshift::Identity::Service::Shared::V1alpha1'
-  _globals['_PAGEDRESPONSE']._serialized_start=108
-  _globals['_PAGEDRESPONSE']._serialized_end=272
+  _globals['DESCRIPTOR']._serialized_options = b'\n-com.outshift.identity.service.shared.v1alpha1B\017PaginationProtoP\001Zxgithub.com/outshift/identity-service/api/server/outshift/identity/service/shared/v1alpha1;identity_service_shared_sdk_go\242\002\004OISS\252\002)Outshift.Identity.Service.Shared.V1alpha1\312\002)Outshift\\Identity\\Service\\Shared\\V1alpha1\342\0025Outshift\\Identity\\Service\\Shared\\V1alpha1\\GPBMetadata\352\002-Outshift::Identity::Service::Shared::V1alpha1'
+  _globals['_PAGEDRESPONSE']._serialized_start=106
+  _globals['_PAGEDRESPONSE']._serialized_end=270
 # @@protoc_insertion_point(module_scope)

@@ -32,27 +32,27 @@ class DeviceServiceStub(object):
             channel: A grpc.Channel.
         """
         self.AddDevice = channel.unary_unary(
-                '/agoutshift.identity.service.v1alpha1.DeviceService/AddDevice',
+                '/outshift.identity.service.v1alpha1.DeviceService/AddDevice',
                 request_serializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_device__service__pb2.AddDeviceRequest.SerializeToString,
                 response_deserializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_device__pb2.Device.FromString,
                 _registered_method=True)
         self.RegisterDevice = channel.unary_unary(
-                '/agoutshift.identity.service.v1alpha1.DeviceService/RegisterDevice',
+                '/outshift.identity.service.v1alpha1.DeviceService/RegisterDevice',
                 request_serializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_device__service__pb2.RegisterDeviceRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 _registered_method=True)
         self.ListDevices = channel.unary_unary(
-                '/agoutshift.identity.service.v1alpha1.DeviceService/ListDevices',
+                '/outshift.identity.service.v1alpha1.DeviceService/ListDevices',
                 request_serializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_device__service__pb2.ListDevicesRequest.SerializeToString,
                 response_deserializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_device__service__pb2.ListDevicesResponse.FromString,
                 _registered_method=True)
         self.DeleteDevice = channel.unary_unary(
-                '/agoutshift.identity.service.v1alpha1.DeviceService/DeleteDevice',
+                '/outshift.identity.service.v1alpha1.DeviceService/DeleteDevice',
                 request_serializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_device__service__pb2.DeleteDeviceRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 _registered_method=True)
         self.TestDevice = channel.unary_unary(
-                '/agoutshift.identity.service.v1alpha1.DeviceService/TestDevice',
+                '/outshift.identity.service.v1alpha1.DeviceService/TestDevice',
                 request_serializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_device__service__pb2.TestDeviceRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 _registered_method=True)
@@ -127,9 +127,9 @@ def add_DeviceServiceServicer_to_server(servicer, server):
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'agoutshift.identity.service.v1alpha1.DeviceService', rpc_method_handlers)
+            'outshift.identity.service.v1alpha1.DeviceService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('agoutshift.identity.service.v1alpha1.DeviceService', rpc_method_handlers)
+    server.add_registered_method_handlers('outshift.identity.service.v1alpha1.DeviceService', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
@@ -151,7 +151,7 @@ class DeviceService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/agoutshift.identity.service.v1alpha1.DeviceService/AddDevice',
+            '/outshift.identity.service.v1alpha1.DeviceService/AddDevice',
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_device__service__pb2.AddDeviceRequest.SerializeToString,
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_device__pb2.Device.FromString,
             options,
@@ -178,7 +178,7 @@ class DeviceService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/agoutshift.identity.service.v1alpha1.DeviceService/RegisterDevice',
+            '/outshift.identity.service.v1alpha1.DeviceService/RegisterDevice',
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_device__service__pb2.RegisterDeviceRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options,
@@ -205,7 +205,7 @@ class DeviceService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/agoutshift.identity.service.v1alpha1.DeviceService/ListDevices',
+            '/outshift.identity.service.v1alpha1.DeviceService/ListDevices',
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_device__service__pb2.ListDevicesRequest.SerializeToString,
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_device__service__pb2.ListDevicesResponse.FromString,
             options,
@@ -232,7 +232,7 @@ class DeviceService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/agoutshift.identity.service.v1alpha1.DeviceService/DeleteDevice',
+            '/outshift.identity.service.v1alpha1.DeviceService/DeleteDevice',
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_device__service__pb2.DeleteDeviceRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options,
@@ -259,7 +259,7 @@ class DeviceService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/agoutshift.identity.service.v1alpha1.DeviceService/TestDevice',
+            '/outshift.identity.service.v1alpha1.DeviceService/TestDevice',
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_device__service__pb2.TestDeviceRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options,

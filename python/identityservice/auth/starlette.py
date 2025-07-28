@@ -6,7 +6,7 @@ import json
 import logging
 
 from a2a.types import AgentCard, HTTPAuthSecurityScheme
-from identityservice.sdk import IdentityPlatformSdk as Sdk
+from identityservice.sdk import IdentityServiceSdk as Sdk
 
 from starlette.applications import Starlette
 from starlette.middleware.base import BaseHTTPMiddleware
@@ -16,7 +16,7 @@ from starlette.responses import JSONResponse, PlainTextResponse
 logger = logging.getLogger("identityservice.auth.starlette")
 
 
-class IdentityPlatformMiddleware(BaseHTTPMiddleware):
+class IdentityServiceMiddleware(BaseHTTPMiddleware):
     """Starlette middleware that authenticates access using an OAuth2 bearer token."""
 
     def __init__(
@@ -48,7 +48,8 @@ class IdentityPlatformMiddleware(BaseHTTPMiddleware):
             access_token = self._parse_access_token(request)
         except Exception as e:
             return self._unauthorized(
-                "Missing or malformed Authorization header.", request)
+                "Missing or malformed Authorization header.", request
+            )
 
         try:
             # Authorize the access token
@@ -77,11 +78,9 @@ class IdentityPlatformMiddleware(BaseHTTPMiddleware):
                 status_code=403,
                 media_type="text/event-stream",
             )
-        return JSONResponse({
-            "error": "forbidden",
-            "reason": reason
-        },
-                            status_code=403)
+        return JSONResponse(
+            {"error": "forbidden", "reason": reason}, status_code=403
+        )
 
     def _unauthorized(self, reason: str, request: Request):
         """Return a 401 Unauthorized response."""
@@ -92,14 +91,12 @@ class IdentityPlatformMiddleware(BaseHTTPMiddleware):
                 status_code=401,
                 media_type="text/event-stream",
             )
-        return JSONResponse({
-            "error": "unauthorized",
-            "reason": reason
-        },
-                            status_code=401)
+        return JSONResponse(
+            {"error": "unauthorized", "reason": reason}, status_code=401
+        )
 
 
-class IdentityPlatformA2AMiddleware(IdentityPlatformMiddleware):
+class IdentityServiceA2AMiddleware(IdentityServiceMiddleware):
     """Starlette middleware that authenticates A2A access using an OAuth2 bearer token."""
 
     def __init__(
@@ -114,27 +111,28 @@ class IdentityPlatformA2AMiddleware(IdentityPlatformMiddleware):
 
         if self.agent_card is None:
             raise ValueError(
-                "AgentCard must be provided to IdentityPlatformMiddleware.")
+                "AgentCard must be provided to IdentityServiceMiddleware."
+            )
 
         if self.agent_card.securitySchemes is None:
             raise ValueError(
-                "AgentCard must have securitySchemes defined for IdentityPlatformMiddleware."
+                "AgentCard must have securitySchemes defined for IdentityServiceMiddleware."
             )
 
-        # Process the Security Requirements Object to make sure that the IdentityPlatformAuthScheme is used
+        # Process the Security Requirements Object to make sure that the IdentityServiceAuthScheme is used
         for sec_scheme in self.agent_card.securitySchemes.values():
             if isinstance(sec_scheme.root, HTTPAuthSecurityScheme):
                 if sec_scheme.root.scheme != "bearer":
                     raise ValueError(
-                        "IdentityPlatformMiddleware requires a bearer token scheme."
+                        "IdentityServiceMiddleware requires a bearer token scheme."
                     )
                 if sec_scheme.root.bearerFormat != "JWT":
                     raise ValueError(
-                        "IdentityPlatformMiddleware requires a JWT bearer format."
+                        "IdentityServiceMiddleware requires a JWT bearer format."
                     )
 
 
-class IdentityPlatformMCPMiddleware(IdentityPlatformMiddleware):
+class IdentityServiceMCPMiddleware(IdentityServiceMiddleware):
     """Starlette middleware that authenticates MCP access using an OAuth2 bearer token."""
 
     PROTECTED_CALLS = ["tools/call", "resources/read"]
@@ -174,7 +172,8 @@ class IdentityPlatformMCPMiddleware(IdentityPlatformMiddleware):
             access_token = self._parse_access_token(request)
         except Exception as e:
             return self._unauthorized(
-                "Missing or malformed Authorization header.", request)
+                "Missing or malformed Authorization header.", request
+            )
 
         try:
             # Authorize the access token for the specific tool

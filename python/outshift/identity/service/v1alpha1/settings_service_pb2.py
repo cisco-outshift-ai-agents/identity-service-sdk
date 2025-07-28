@@ -26,20 +26,20 @@ from google.protobuf.internal import builder as _builder
 _sym_db = _symbol_database.Default()
 
 
-from outshift.identity.service.v1alpha1 import settings_pb2 as outshift_dot_identity_dot_service_dot_v1alpha1_dot_settings__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
+from outshift.identity.service.v1alpha1 import settings_pb2 as outshift_dot_identity_dot_service_dot_v1alpha1_dot_settings__pb2
 from protoc_gen_openapiv2.options import annotations_pb2 as protoc__gen__openapiv2_dot_options_dot_annotations__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n9outshift/identity/service/v1alpha1/settings_service.proto\x12$agoutshift.identity.service.v1alpha1\x1a\x31outshift/identity/service/v1alpha1/settings.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x14\n\x12GetSettingsRequest\"\x12\n\x10SetApiKeyRequest\"v\n\x10SetIssuerRequest\x12\x62\n\x0fissuer_settings\x18\x01 \x01(\x0b\x32\x34.agoutshift.identity.service.v1alpha1.IssuerSettingsB\x03\xe0\x41\x02R\x0eissuerSettings2\xcd\x05\n\x0fSettingsService\x12\xc1\x01\n\x0bGetSettings\x12\x38.agoutshift.identity.service.v1alpha1.GetSettingsRequest\x1a..agoutshift.identity.service.v1alpha1.Settings\"H\x92\x41+\x12\x1bGet Settings for the Tenant*\x0cGet Settings\x82\xd3\xe4\x93\x02\x14\x12\x12/v1alpha1/settings\x12\xea\x01\n\tSetApiKey\x12\x36.agoutshift.identity.service.v1alpha1.SetApiKeyRequest\x1a,.agoutshift.identity.service.v1alpha1.ApiKey\"w\x92\x41R\x12\x0eSet up API Key\x1a@Create a new API Key for the Tenant. Revoke any previous API Key\x82\xd3\xe4\x93\x02\x1c\"\x1a/v1alpha1/settings/api-key\x12\xf9\x01\n\tSetIssuer\x12\x36.agoutshift.identity.service.v1alpha1.SetIssuerRequest\x1a\x34.agoutshift.identity.service.v1alpha1.IssuerSettings\"~\x92\x41W\x12\x46\x43reate and register Issuer for the Tenant. Revoke any previous Issuer.*\rSet up Issuer\x82\xd3\xe4\x93\x02\x1e\"\x19/v1alpha1/settings/issuer:\x01*\x1a\r\x92\x41\n\n\x08SettingsB\xdf\x02\n(com.agoutshift.identity.service.v1alpha1B\x14SettingsServiceProtoP\x01Zjgithub.com/outshift/identity-service/api/server/outshift/identity/service/v1alpha1;identity_service_sdk_go\xa2\x02\x03\x41IS\xaa\x02$Agoutshift.Identity.Service.V1alpha1\xca\x02$Agoutshift\\Identity\\Service\\V1alpha1\xe2\x02\x30\x41goutshift\\Identity\\Service\\V1alpha1\\GPBMetadata\xea\x02\'Agoutshift::Identity::Service::V1alpha1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n9outshift/identity/service/v1alpha1/settings_service.proto\x12\"outshift.identity.service.v1alpha1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x31outshift/identity/service/v1alpha1/settings.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x14\n\x12GetSettingsRequest\"\x12\n\x10SetApiKeyRequest\"t\n\x10SetIssuerRequest\x12`\n\x0fissuer_settings\x18\x01 \x01(\x0b\x32\x32.outshift.identity.service.v1alpha1.IssuerSettingsB\x03\xe0\x41\x02R\x0eissuerSettings2\xc1\x05\n\x0fSettingsService\x12\xbd\x01\n\x0bGetSettings\x12\x36.outshift.identity.service.v1alpha1.GetSettingsRequest\x1a,.outshift.identity.service.v1alpha1.Settings\"H\x92\x41+\x12\x1bGet Settings for the Tenant*\x0cGet Settings\x82\xd3\xe4\x93\x02\x14\x12\x12/v1alpha1/settings\x12\xe6\x01\n\tSetApiKey\x12\x34.outshift.identity.service.v1alpha1.SetApiKeyRequest\x1a*.outshift.identity.service.v1alpha1.ApiKey\"w\x92\x41R\x12\x0eSet up API Key\x1a@Create a new API Key for the Tenant. Revoke any previous API Key\x82\xd3\xe4\x93\x02\x1c\"\x1a/v1alpha1/settings/api-key\x12\xf5\x01\n\tSetIssuer\x12\x34.outshift.identity.service.v1alpha1.SetIssuerRequest\x1a\x32.outshift.identity.service.v1alpha1.IssuerSettings\"~\x92\x41W\x12\x46\x43reate and register Issuer for the Tenant. Revoke any previous Issuer.*\rSet up Issuer\x82\xd3\xe4\x93\x02\x1e\"\x19/v1alpha1/settings/issuer:\x01*\x1a\r\x92\x41\n\n\x08SettingsB\xd5\x02\n&com.outshift.identity.service.v1alpha1B\x14SettingsServiceProtoP\x01Zjgithub.com/outshift/identity-service/api/server/outshift/identity/service/v1alpha1;identity_service_sdk_go\xa2\x02\x03OIS\xaa\x02\"Outshift.Identity.Service.V1alpha1\xca\x02\"Outshift\\Identity\\Service\\V1alpha1\xe2\x02.Outshift\\Identity\\Service\\V1alpha1\\GPBMetadata\xea\x02%Outshift::Identity::Service::V1alpha1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'outshift.identity.service.v1alpha1.settings_service_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['DESCRIPTOR']._options = None
-  _globals['DESCRIPTOR']._serialized_options = b'\n(com.agoutshift.identity.service.v1alpha1B\024SettingsServiceProtoP\001Zjgithub.com/outshift/identity-service/api/server/outshift/identity/service/v1alpha1;identity_service_sdk_go\242\002\003AIS\252\002$Agoutshift.Identity.Service.V1alpha1\312\002$Agoutshift\\Identity\\Service\\V1alpha1\342\0020Agoutshift\\Identity\\Service\\V1alpha1\\GPBMetadata\352\002\'Agoutshift::Identity::Service::V1alpha1'
+  _globals['DESCRIPTOR']._serialized_options = b'\n&com.outshift.identity.service.v1alpha1B\024SettingsServiceProtoP\001Zjgithub.com/outshift/identity-service/api/server/outshift/identity/service/v1alpha1;identity_service_sdk_go\242\002\003OIS\252\002\"Outshift.Identity.Service.V1alpha1\312\002\"Outshift\\Identity\\Service\\V1alpha1\342\002.Outshift\\Identity\\Service\\V1alpha1\\GPBMetadata\352\002%Outshift::Identity::Service::V1alpha1'
   _globals['_SETISSUERREQUEST'].fields_by_name['issuer_settings']._options = None
   _globals['_SETISSUERREQUEST'].fields_by_name['issuer_settings']._serialized_options = b'\340A\002'
   _globals['_SETTINGSSERVICE']._options = None
@@ -50,12 +50,12 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['_SETTINGSSERVICE'].methods_by_name['SetApiKey']._serialized_options = b'\222AR\022\016Set up API Key\032@Create a new API Key for the Tenant. Revoke any previous API Key\202\323\344\223\002\034\"\032/v1alpha1/settings/api-key'
   _globals['_SETTINGSSERVICE'].methods_by_name['SetIssuer']._options = None
   _globals['_SETTINGSSERVICE'].methods_by_name['SetIssuer']._serialized_options = b'\222AW\022FCreate and register Issuer for the Tenant. Revoke any previous Issuer.*\rSet up Issuer\202\323\344\223\002\036\"\031/v1alpha1/settings/issuer:\001*'
-  _globals['_GETSETTINGSREQUEST']._serialized_start=261
-  _globals['_GETSETTINGSREQUEST']._serialized_end=281
-  _globals['_SETAPIKEYREQUEST']._serialized_start=283
-  _globals['_SETAPIKEYREQUEST']._serialized_end=301
-  _globals['_SETISSUERREQUEST']._serialized_start=303
-  _globals['_SETISSUERREQUEST']._serialized_end=421
-  _globals['_SETTINGSSERVICE']._serialized_start=424
-  _globals['_SETTINGSSERVICE']._serialized_end=1141
+  _globals['_GETSETTINGSREQUEST']._serialized_start=259
+  _globals['_GETSETTINGSREQUEST']._serialized_end=279
+  _globals['_SETAPIKEYREQUEST']._serialized_start=281
+  _globals['_SETAPIKEYREQUEST']._serialized_end=299
+  _globals['_SETISSUERREQUEST']._serialized_start=301
+  _globals['_SETISSUERREQUEST']._serialized_end=417
+  _globals['_SETTINGSSERVICE']._serialized_start=420
+  _globals['_SETTINGSSERVICE']._serialized_end=1125
 # @@protoc_insertion_point(module_scope)

@@ -32,57 +32,57 @@ class PolicyServiceStub(object):
             channel: A grpc.Channel.
         """
         self.ListPolicies = channel.unary_unary(
-                '/agoutshift.identity.service.v1alpha1.PolicyService/ListPolicies',
+                '/outshift.identity.service.v1alpha1.PolicyService/ListPolicies',
                 request_serializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__service__pb2.ListPoliciesRequest.SerializeToString,
                 response_deserializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__service__pb2.ListPoliciesResponse.FromString,
                 _registered_method=True)
         self.GetPoliciesCount = channel.unary_unary(
-                '/agoutshift.identity.service.v1alpha1.PolicyService/GetPoliciesCount',
+                '/outshift.identity.service.v1alpha1.PolicyService/GetPoliciesCount',
                 request_serializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__service__pb2.GetPoliciesCountRequest.SerializeToString,
                 response_deserializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__service__pb2.GetPoliciesCountResponse.FromString,
                 _registered_method=True)
         self.GetPolicy = channel.unary_unary(
-                '/agoutshift.identity.service.v1alpha1.PolicyService/GetPolicy',
+                '/outshift.identity.service.v1alpha1.PolicyService/GetPolicy',
                 request_serializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__service__pb2.GetPolicyRequest.SerializeToString,
                 response_deserializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__pb2.Policy.FromString,
                 _registered_method=True)
         self.CreatePolicy = channel.unary_unary(
-                '/agoutshift.identity.service.v1alpha1.PolicyService/CreatePolicy',
+                '/outshift.identity.service.v1alpha1.PolicyService/CreatePolicy',
                 request_serializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__service__pb2.CreatePolicyRequest.SerializeToString,
                 response_deserializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__pb2.Policy.FromString,
                 _registered_method=True)
         self.UpdatePolicy = channel.unary_unary(
-                '/agoutshift.identity.service.v1alpha1.PolicyService/UpdatePolicy',
+                '/outshift.identity.service.v1alpha1.PolicyService/UpdatePolicy',
                 request_serializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__service__pb2.UpdatePolicyRequest.SerializeToString,
                 response_deserializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__pb2.Policy.FromString,
                 _registered_method=True)
         self.DeletePolicy = channel.unary_unary(
-                '/agoutshift.identity.service.v1alpha1.PolicyService/DeletePolicy',
+                '/outshift.identity.service.v1alpha1.PolicyService/DeletePolicy',
                 request_serializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__service__pb2.DeletePolicyRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 _registered_method=True)
         self.ListRules = channel.unary_unary(
-                '/agoutshift.identity.service.v1alpha1.PolicyService/ListRules',
+                '/outshift.identity.service.v1alpha1.PolicyService/ListRules',
                 request_serializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__service__pb2.ListRulesRequest.SerializeToString,
                 response_deserializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__service__pb2.ListRulesResponse.FromString,
                 _registered_method=True)
         self.GetRule = channel.unary_unary(
-                '/agoutshift.identity.service.v1alpha1.PolicyService/GetRule',
+                '/outshift.identity.service.v1alpha1.PolicyService/GetRule',
                 request_serializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__service__pb2.GetRuleRequest.SerializeToString,
                 response_deserializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__pb2.Rule.FromString,
                 _registered_method=True)
         self.CreateRule = channel.unary_unary(
-                '/agoutshift.identity.service.v1alpha1.PolicyService/CreateRule',
+                '/outshift.identity.service.v1alpha1.PolicyService/CreateRule',
                 request_serializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__service__pb2.CreateRuleRequest.SerializeToString,
                 response_deserializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__pb2.Rule.FromString,
                 _registered_method=True)
         self.UpdateRule = channel.unary_unary(
-                '/agoutshift.identity.service.v1alpha1.PolicyService/UpdateRule',
+                '/outshift.identity.service.v1alpha1.PolicyService/UpdateRule',
                 request_serializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__service__pb2.UpdateRuleRequest.SerializeToString,
                 response_deserializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__pb2.Rule.FromString,
                 _registered_method=True)
         self.DeleteRule = channel.unary_unary(
-                '/agoutshift.identity.service.v1alpha1.PolicyService/DeleteRule',
+                '/outshift.identity.service.v1alpha1.PolicyService/DeleteRule',
                 request_serializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__service__pb2.DeleteRuleRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 _registered_method=True)
@@ -229,9 +229,9 @@ def add_PolicyServiceServicer_to_server(servicer, server):
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'agoutshift.identity.service.v1alpha1.PolicyService', rpc_method_handlers)
+            'outshift.identity.service.v1alpha1.PolicyService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('agoutshift.identity.service.v1alpha1.PolicyService', rpc_method_handlers)
+    server.add_registered_method_handlers('outshift.identity.service.v1alpha1.PolicyService', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
@@ -253,7 +253,7 @@ class PolicyService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/agoutshift.identity.service.v1alpha1.PolicyService/ListPolicies',
+            '/outshift.identity.service.v1alpha1.PolicyService/ListPolicies',
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__service__pb2.ListPoliciesRequest.SerializeToString,
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__service__pb2.ListPoliciesResponse.FromString,
             options,
@@ -280,7 +280,7 @@ class PolicyService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/agoutshift.identity.service.v1alpha1.PolicyService/GetPoliciesCount',
+            '/outshift.identity.service.v1alpha1.PolicyService/GetPoliciesCount',
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__service__pb2.GetPoliciesCountRequest.SerializeToString,
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__service__pb2.GetPoliciesCountResponse.FromString,
             options,
@@ -307,7 +307,7 @@ class PolicyService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/agoutshift.identity.service.v1alpha1.PolicyService/GetPolicy',
+            '/outshift.identity.service.v1alpha1.PolicyService/GetPolicy',
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__service__pb2.GetPolicyRequest.SerializeToString,
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__pb2.Policy.FromString,
             options,
@@ -334,7 +334,7 @@ class PolicyService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/agoutshift.identity.service.v1alpha1.PolicyService/CreatePolicy',
+            '/outshift.identity.service.v1alpha1.PolicyService/CreatePolicy',
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__service__pb2.CreatePolicyRequest.SerializeToString,
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__pb2.Policy.FromString,
             options,
@@ -361,7 +361,7 @@ class PolicyService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/agoutshift.identity.service.v1alpha1.PolicyService/UpdatePolicy',
+            '/outshift.identity.service.v1alpha1.PolicyService/UpdatePolicy',
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__service__pb2.UpdatePolicyRequest.SerializeToString,
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__pb2.Policy.FromString,
             options,
@@ -388,7 +388,7 @@ class PolicyService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/agoutshift.identity.service.v1alpha1.PolicyService/DeletePolicy',
+            '/outshift.identity.service.v1alpha1.PolicyService/DeletePolicy',
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__service__pb2.DeletePolicyRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options,
@@ -415,7 +415,7 @@ class PolicyService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/agoutshift.identity.service.v1alpha1.PolicyService/ListRules',
+            '/outshift.identity.service.v1alpha1.PolicyService/ListRules',
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__service__pb2.ListRulesRequest.SerializeToString,
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__service__pb2.ListRulesResponse.FromString,
             options,
@@ -442,7 +442,7 @@ class PolicyService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/agoutshift.identity.service.v1alpha1.PolicyService/GetRule',
+            '/outshift.identity.service.v1alpha1.PolicyService/GetRule',
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__service__pb2.GetRuleRequest.SerializeToString,
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__pb2.Rule.FromString,
             options,
@@ -469,7 +469,7 @@ class PolicyService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/agoutshift.identity.service.v1alpha1.PolicyService/CreateRule',
+            '/outshift.identity.service.v1alpha1.PolicyService/CreateRule',
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__service__pb2.CreateRuleRequest.SerializeToString,
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__pb2.Rule.FromString,
             options,
@@ -496,7 +496,7 @@ class PolicyService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/agoutshift.identity.service.v1alpha1.PolicyService/UpdateRule',
+            '/outshift.identity.service.v1alpha1.PolicyService/UpdateRule',
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__service__pb2.UpdateRuleRequest.SerializeToString,
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__pb2.Rule.FromString,
             options,
@@ -523,7 +523,7 @@ class PolicyService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/agoutshift.identity.service.v1alpha1.PolicyService/DeleteRule',
+            '/outshift.identity.service.v1alpha1.PolicyService/DeleteRule',
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_policy__service__pb2.DeleteRuleRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options,
