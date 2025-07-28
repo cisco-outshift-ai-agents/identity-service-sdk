@@ -6,12 +6,12 @@ requires = ["setuptools", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "identity-platform-sdk"
+name = "identity-service-sdk"
 version = "0.0.1"
 authors = [
     {name = "Jean Diaconu", email = "jdiaconu@cisco.com"},
 ]
-description = "Identity SDK & CLI for Python"
+description = "Agent Identity Service SDK & CLI for Python"
 readme = "README.md"
 requires-python = ">=3.12"
 license = "Apache-2.0"
@@ -21,14 +21,14 @@ classifiers = [
 dependencies = ["grpcio", "protobuf", "grpcio-tools", "protoc_gen_openapiv2", "python-dotenv", "mcp", "typer", "httpx", "starlette", "a2a-sdk"]
 
 [project.urls]
-"Homepage" = "https://github.com/agntcy/identity-platform"
-"Bug Tracker" = "https://github.com/agntcy/identity-platform/issues"
+"Homepage" = "https://github.com/outshift/identity-service-sdk"
+"Bug Tracker" = "https://github.com/outshift/identity-service-sdk/issues"
 
 [project.scripts]
-identity-cli = "identityplatform.cli:app"
+identity-cli = "identityservice.cli:app"
 
 [tool.setuptools]
-packages = ["identityplatform", "identityplatform.commands", "identityplatform.auth", "identityplatform.badge", "openapiv3", "google.api", "agntcy.identity.platform.v1alpha1", "agntcy.identity.platform.shared.v1alpha1"]
+packages = ["identityservice", "identityservice.commands", "identityservice.auth", "identityservice.badge", "openapiv3", "google.api", "outshift.identity.service.v1alpha1", "outshift.identity.service.shared.v1alpha1"]
 
 [tool.pytest.ini_options]
 minversion = "8.0.0"
