@@ -25,10 +25,10 @@ dependencies = ["grpcio", "protobuf", "grpcio-tools", "protoc_gen_openapiv2", "p
 "Bug Tracker" = "https://github.com/agntcy/identity-platform/issues"
 
 [project.scripts]
-identity-cli = "identityplatform.cli:app"
+identity-cli = "identityservice.cli:app"
 
 [tool.setuptools]
-packages = ["identityplatform", "identityplatform.commands", "identityplatform.auth", "identityplatform.badge", "openapiv3", "google.api", "agntcy.identity.platform.v1alpha1", "agntcy.identity.platform.shared.v1alpha1"]
+packages = ["identityservice", "identityservice.commands", "identityservice.auth", "identityservice.badge", "openapiv3", "google.api", "agntcy.identity.platform.v1alpha1", "agntcy.identity.platform.shared.v1alpha1"]
 
 [tool.pytest.ini_options]
 minversion = "8.0.0"
