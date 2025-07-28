@@ -4,18 +4,18 @@
 
 import logging
 
-from identityservice.sdk import IdentityPlatformSdk as Sdk
+from identityservice.sdk import IdentityServiceSdk as Sdk
 
 import httpx
 
 logger = logging.getLogger("identityservice.auth.httpx")
 
 
-class IdentityPlatformAuth(httpx.Auth):
+class IdentityServiceAuth(httpx.Auth):
     """Httpx authentication class for the Identity Service SDK."""
 
     def __init__(self):
-        """Initialize the IdentityPlatformAuth class."""
+        """Initialize the IdentityServiceAuth class."""
         self.sdk = Sdk()
 
     def auth_flow(self, request):

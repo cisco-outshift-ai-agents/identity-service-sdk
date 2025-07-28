@@ -30,10 +30,10 @@ def _load_grpc_objects(module, path):
         module = import_module(f"{path}.{modname}")
         # Inspect the module and set attributes on Identity SDK for each class found
         for name, obj in inspect.getmembers(module, inspect.isclass):
-            setattr(IdentityPlatformSdk, name, obj)
+            setattr(IdentityServiceSdk, name, obj)
 
 
-class IdentityPlatformSdk:
+class IdentityServiceSdk:
     """Identity Service SDK for Python."""
 
     def __init__(
@@ -51,7 +51,7 @@ class IdentityPlatformSdk:
         # Try to get the API Key from the environment variable
         if api_key is None:
             load_dotenv()
-            api_key = os.environ.get("IDENTITY_PLATFORM_API_KEY")
+            api_key = os.environ.get("IDENTITY_SERVICE_API_KEY")
 
         # Validate API Key
         if not api_key:
@@ -80,19 +80,19 @@ class IdentityPlatformSdk:
         self,
     ) -> "outshift.identity.service.v1alpha1.AppsService":
         """Return the AppService stub."""
-        return IdentityPlatformSdk.AppServiceStub(self.client.channel)
+        return IdentityServiceSdk.AppServiceStub(self.client.channel)
 
     def _get_badge_service(
         self,
     ) -> "outshift.identity.service.v1alpha1.BadgeService":
         """Return the BadgeService stub."""
-        return IdentityPlatformSdk.BadgeServiceStub(self.client.channel)
+        return IdentityServiceSdk.BadgeServiceStub(self.client.channel)
 
     def _get_auth_service(
         self,
     ) -> "outshift.identity.service.v1alpha1.AuthService":
         """Return the AuthService stub."""
-        return IdentityPlatformSdk.AuthServiceStub(self.client.channel)
+        return IdentityServiceSdk.AuthServiceStub(self.client.channel)
 
     def access_token(
         self,
@@ -112,7 +112,7 @@ class IdentityPlatformSdk:
         """
         try:
             auth_response = self._get_auth_service().Authorize(
-                IdentityPlatformSdk.AuthorizeRequest(
+                IdentityServiceSdk.AuthorizeRequest(
                     app_id=agentic_service_id,
                     tool_name=tool_name,
                     user_token=user_token,
@@ -120,7 +120,7 @@ class IdentityPlatformSdk:
             )
 
             token_response = self._get_auth_service().Token(
-                IdentityPlatformSdk.TokenRequest(
+                IdentityServiceSdk.TokenRequest(
                     authorization_code=auth_response.authorization_code,
                 )
             )
@@ -139,7 +139,7 @@ class IdentityPlatformSdk:
             tool_name (str | None): The name of the tool to authorize for.
         """
         return self._get_auth_service().ExtAuthz(
-            IdentityPlatformSdk.ExtAuthzRequest(
+            IdentityServiceSdk.ExtAuthzRequest(
                 access_token=access_token,
                 tool_name=tool_name,
             )
@@ -157,7 +157,7 @@ class IdentityPlatformSdk:
             VerificationResult: The result of the verification.
         """
         return self._get_badge_service().VerifyBadge(
-            request=IdentityPlatformSdk.VerifyBadgeRequest(badge=badge)
+            request=IdentityServiceSdk.VerifyBadgeRequest(badge=badge)
         )
 
     async def averify_badge(
@@ -172,7 +172,7 @@ class IdentityPlatformSdk:
             VerificationResult: The result of the verification.
         """
         return await self._get_badge_service().VerifyBadge(
-            IdentityPlatformSdk.VerifyBadgeRequest(badge=badge)
+            IdentityServiceSdk.VerifyBadgeRequest(badge=badge)
         )
 
     def issue_badge(
@@ -232,7 +232,7 @@ class IdentityPlatformSdk:
 
         # Issue the badge
         self._get_badge_service().IssueBadge(
-            request=IdentityPlatformSdk.IssueBadgeRequest(
+            request=IdentityServiceSdk.IssueBadgeRequest(
                 app_id=service_id, **claims
             )
         )
