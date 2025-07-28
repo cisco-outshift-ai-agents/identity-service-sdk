@@ -6,14 +6,14 @@ import json
 import logging
 
 from a2a.types import AgentCard, HTTPAuthSecurityScheme
-from identityplatform.sdk import IdentityPlatformSdk as Sdk
+from identityservice.sdk import IdentityPlatformSdk as Sdk
 
 from starlette.applications import Starlette
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request
 from starlette.responses import JSONResponse, PlainTextResponse
 
-logger = logging.getLogger("identityplatform.auth.starlette")
+logger = logging.getLogger("identityservice.auth.starlette")
 
 
 class IdentityPlatformMiddleware(BaseHTTPMiddleware):

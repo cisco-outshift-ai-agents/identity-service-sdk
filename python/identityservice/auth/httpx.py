@@ -4,11 +4,11 @@
 
 import logging
 
-from identityplatform.sdk import IdentityPlatformSdk as Sdk
+from identityservice.sdk import IdentityPlatformSdk as Sdk
 
 import httpx
 
-logger = logging.getLogger("identityplatform.auth.httpx")
+logger = logging.getLogger("identityservice.auth.httpx")
 
 
 class IdentityPlatformAuth(httpx.Auth):

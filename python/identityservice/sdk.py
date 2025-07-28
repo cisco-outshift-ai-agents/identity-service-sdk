@@ -15,12 +15,12 @@ from agntcy.identity.platform.v1alpha1.app_pb2 import AppType
 from dotenv import load_dotenv
 from google.protobuf import empty_pb2
 
-from identityplatform import client
-from identityplatform.badge.a2a import discover as discover_a2a
-from identityplatform.badge.mcp import discover as discover_mcp
+from identityservice import client
+from identityservice.badge.a2a import discover as discover_a2a
+from identityservice.badge.mcp import discover as discover_mcp
 
-logging.getLogger("identityplatform").addHandler(logging.NullHandler())
-logger = logging.getLogger("identityplatform.sdk")
+logging.getLogger("identityservice").addHandler(logging.NullHandler())
+logger = logging.getLogger("identityservice.sdk")
 
 
 def _load_grpc_objects(module, path):

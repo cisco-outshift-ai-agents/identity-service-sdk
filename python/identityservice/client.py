@@ -9,9 +9,9 @@ import os
 import grpc
 from dotenv import load_dotenv
 
-from identityplatform import constant
+from identityservice import constant
 
-logger = logging.getLogger("identityplatform.client")
+logger = logging.getLogger("identityservice.client")
 
 
 class Client:  # pylint: disable=too-few-public-methods

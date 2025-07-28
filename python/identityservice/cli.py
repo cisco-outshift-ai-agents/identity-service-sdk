@@ -4,7 +4,7 @@
 
 import typer
 
-from identityplatform.commands import badge
+from identityservice.commands import badge
 
 app = typer.Typer()
 app.add_typer(
