@@ -3,7 +3,7 @@
 """Badge services for the Identity Service Python SDK."""
 
 import typer
-from identityservice.sdk import IdentityPlatformSdk as Sdk
+from identityservice.sdk import IdentityServiceSdk as Sdk
 from rich import print
 from typing_extensions import Annotated
 
