@@ -22,7 +22,7 @@ class Client:  # pylint: disable=too-few-public-methods
         load_dotenv()
 
         # Get credentials
-        grpc_server_url = os.environ.get("IDENTITY_PLATFORM_GRPC_SERVER_URL",
+        grpc_server_url = os.environ.get("IDENTITY_SERVICE_GRPC_SERVER_URL",
                                          constant.DEFAULT_GRPC_URL)
         call_credentials = grpc.metadata_call_credentials(
             lambda _, callback: callback(
@@ -48,8 +48,8 @@ class Client:  # pylint: disable=too-few-public-methods
         ]
 
         # Get credentials type
-        use_ssl = int(os.environ.get("IDENTITY_PLATFORM_USE_SSL", 1))
-        use_insecure = int(os.environ.get("IDENTITY_PLATFORM_USE_INSECURE", 0))
+        use_ssl = int(os.environ.get("IDENTITY_SERVICE_USE_SSL", 1))
+        use_insecure = int(os.environ.get("IDENTITY_SERVICE_USE_INSECURE", 0))
 
         logger.debug("Using SSL: %s, Insecure: %s", use_ssl, use_insecure)
 
@@ -57,7 +57,7 @@ class Client:  # pylint: disable=too-few-public-methods
         if use_ssl == 1:
             if use_insecure == 1:
                 root_cert = base64.b64decode(
-                    os.environ["IDENTITY_PLATFORM_INSECURE_ROOT_CA"])
+                    os.environ["IDENTITY_SERVICE_INSECURE_ROOT_CA"])
                 channel_credentials = grpc.ssl_channel_credentials(
                     root_certificates=root_cert)
             else:
