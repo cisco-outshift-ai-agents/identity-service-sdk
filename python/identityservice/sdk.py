@@ -16,6 +16,7 @@ from google.protobuf import empty_pb2
 from outshift.identity.service.v1alpha1.app_pb2 import AppType
 
 from identityservice import client
+from identityservice.badge.a2a import adiscover as adiscover_a2a
 from identityservice.badge.a2a import discover as discover_a2a
 from identityservice.badge.mcp import discover as discover_mcp
 
@@ -232,6 +233,68 @@ class IdentityServiceSdk:
 
         # Issue the badge
         self._get_badge_service().IssueBadge(
+            request=IdentityServiceSdk.IssueBadgeRequest(
+                app_id=service_id, **claims
+            )
+        )
+
+    async def aissue_badge(
+        self,
+        url: str,
+    ):
+        """Issue a badge for an agentic service.
+
+        Parameters:
+            url (str): The URL of the agentic service to issue a badge for.
+        """
+        # Fetch the agentic service
+        app_info = await self._get_auth_service().AppInfo(self.empty_request())
+
+        # Get name and type
+        service_name = app_info.app.name
+        service_type = app_info.app.type
+        service_id = app_info.app.id
+
+        logger.debug(f"Service Name: [bold blue]{service_name}[/bold blue]")
+        logger.debug(f"Service Type: [bold blue]{service_type}[/bold blue]")
+
+        # Get claims
+        claims = {}
+
+        if service_type == AppType.Value(
+            "APP_TYPE_MCP_SERVER"
+        ):  # APP_TYPE_MCP_SERVER
+            logger.debug(
+                f"[bold green]Discovering MCP server for {service_name} at {url}[/bold green]"
+            )
+
+            # Discover the MCP server
+            schema = await discover_mcp(service_name, url)
+
+            claims["mcp"] = {
+                "schema_base64": base64.b64encode(schema.encode("utf-8")),
+            }
+        elif service_type == AppType.Value(
+            "APP_TYPE_AGENT_A2A"
+        ):  # APP_TYPE_AGENT_A2A
+            logger.debug(
+                f"[bold green]Discovering A2A agent for {service_name} at [bold blue]{url}[/bold blue][/bold green]"
+            )
+
+            # Discover the A2A agent
+            schema = await adiscover_a2a(url)
+
+            claims["a2a"] = {
+                "schema_base64": base64.b64encode(schema.encode("utf-8")),
+            }
+
+        if not claims:
+            raise ValueError(
+                f"Unsupported service type: {service_type} for service {service_name}"
+            )
+
+        # Issue the badge
+        await self._get_badge_service().IssueBadge(
             request=IdentityServiceSdk.IssueBadgeRequest(
                 app_id=service_id, **claims
             )
