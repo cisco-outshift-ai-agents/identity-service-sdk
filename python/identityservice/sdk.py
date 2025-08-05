@@ -77,13 +77,19 @@ class IdentityServiceSdk:
         """Return an empty request object."""
         return empty_pb2.Empty()
 
-    def _get_app_service(
+    def get_settings_service(
+        self,
+    ) -> "outshift.identity.service.v1alpha1.SettingsService":
+        """Return the SettingsService stub."""
+        return IdentityServiceSdk.SettingsServiceStub(self.client.channel)
+
+    def get_app_service(
         self,
     ) -> "outshift.identity.service.v1alpha1.AppsService":
         """Return the AppService stub."""
         return IdentityServiceSdk.AppServiceStub(self.client.channel)
 
-    def _get_badge_service(
+    def get_badge_service(
         self,
     ) -> "outshift.identity.service.v1alpha1.BadgeService":
         """Return the BadgeService stub."""
@@ -157,7 +163,7 @@ class IdentityServiceSdk:
         Returns:
             VerificationResult: The result of the verification.
         """
-        return self._get_badge_service().VerifyBadge(
+        return self.get_badge_service().VerifyBadge(
             request=IdentityServiceSdk.VerifyBadgeRequest(badge=badge)
         )
 
@@ -172,7 +178,7 @@ class IdentityServiceSdk:
         Returns:
             VerificationResult: The result of the verification.
         """
-        return await self._get_badge_service().VerifyBadge(
+        return await self.get_badge_service().VerifyBadge(
             IdentityServiceSdk.VerifyBadgeRequest(badge=badge)
         )
 
@@ -232,7 +238,7 @@ class IdentityServiceSdk:
             )
 
         # Issue the badge
-        self._get_badge_service().IssueBadge(
+        self.get_badge_service().IssueBadge(
             request=IdentityServiceSdk.IssueBadgeRequest(
                 app_id=service_id, **claims
             )
@@ -294,7 +300,7 @@ class IdentityServiceSdk:
             )
 
         # Issue the badge
-        await self._get_badge_service().IssueBadge(
+        await self.get_badge_service().IssueBadge(
             request=IdentityServiceSdk.IssueBadgeRequest(
                 app_id=service_id, **claims
             )
