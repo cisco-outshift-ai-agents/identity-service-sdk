@@ -9,7 +9,6 @@ A2A_WELL_KNOWN_URL = "/.well-known/agent.json"
 
 def discover(well_known_url):
     """Fetch the agent card from the well-known URL."""
-
     # Ensure the URL ends with a trailing slash
     if not well_known_url.endswith(A2A_WELL_KNOWN_URL):
         well_known_url = well_known_url.rstrip("/") + A2A_WELL_KNOWN_URL
@@ -27,6 +26,30 @@ def discover(well_known_url):
         # Return the response body as a string
         return response.text
 
+    except Exception as e:
+        # Handle exceptions and re-raise them
+        raise e
+
+
+async def adiscover(well_known_url):
+    """Fetch the agent card from the well-known URL."""
+    # Ensure the URL ends with a trailing slash
+    if not well_known_url.endswith(A2A_WELL_KNOWN_URL):
+        well_known_url = well_known_url.rstrip("/") + A2A_WELL_KNOWN_URL
+
+    try:
+        # Perform the GET request
+        async with httpx.AsyncClient() as client:
+            response = await client.get(well_known_url)
+
+            # Check if the status code is OK
+            if response.status_code != 200:
+                raise Exception(
+                    f"Failed to get agent card with status code: {response.status_code}"
+                )
+
+            # Return the response body as a string
+            return response.text
     except Exception as e:
         # Handle exceptions and re-raise them
         raise e
