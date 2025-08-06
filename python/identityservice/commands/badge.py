@@ -1,4 +1,4 @@
-# pylint: disable=redefined-builtin
+# pylint: disable=redefined-builtin, line-too-long
 # Copyright 2025 Cisco Systems, Inc. and its affiliates
 # SPDX-License-Identifier: Apache-2.0
 """Badge services for the Identity Service Python SDK."""
@@ -50,11 +50,13 @@ def create(
     print(f"Service Type: [bold blue]{service_type}[/bold blue]")
 
     if service_type == 3:  # APP_TYPE_MCP_SERVER
-        print(f"""[bold green]Discovering MCP server for {service_name}
-            at {url}[/bold green]""")
+        print(
+            f"""[bold green]Discovering MCP server for {service_name} at {url}[/bold green]"""
+        )
     elif service_type == 1:  # APP_TYPE_A2A_AGENT
-        print(f"""[bold green]Discovering A2A agent for {service_name}
-            at [bold blue]{url}[/bold blue][/bold green]""")
+        print(
+            f"""[bold green]Discovering A2A agent for {service_name} at [bold blue]{url}[/bold blue][/bold green]"""
+        )
 
     print(
         f"[bold green]Issuing badge for service [bold blue]{service_id}[/bold blue][/bold green]"
@@ -65,5 +67,6 @@ def create(
         url=url,
     )
 
-    print(f"""[bold green]Badge issued successfully for service
-        [bold blue]{service_id}[/bold blue][/bold green]""")
+    print(
+        f"""[bold green]Badge issued successfully for service [bold blue]{service_id}[/bold blue][/bold green]"""
+    )
