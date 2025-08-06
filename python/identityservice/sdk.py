@@ -20,6 +20,7 @@ from identityservice.badge.a2a import adiscover as adiscover_a2a
 from identityservice.badge.a2a import discover as discover_a2a
 from identityservice.badge.mcp import discover as discover_mcp
 
+
 logging.getLogger("identityservice").addHandler(logging.NullHandler())
 logger = logging.getLogger("identityservice.sdk")
 
@@ -78,26 +79,22 @@ class IdentityServiceSdk:
         return empty_pb2.Empty()
 
     def get_settings_service(
-        self,
-    ) -> "outshift.identity.service.v1alpha1.SettingsService":
+        self, ) -> "outshift.identity.service.v1alpha1.SettingsService":
         """Return the SettingsService stub."""
         return IdentityServiceSdk.SettingsServiceStub(self.client.channel)
 
     def get_app_service(
-        self,
-    ) -> "outshift.identity.service.v1alpha1.AppsService":
+        self, ) -> "outshift.identity.service.v1alpha1.AppsService":
         """Return the AppService stub."""
         return IdentityServiceSdk.AppServiceStub(self.client.channel)
 
     def get_badge_service(
-        self,
-    ) -> "outshift.identity.service.v1alpha1.BadgeService":
+        self, ) -> "outshift.identity.service.v1alpha1.BadgeService":
         """Return the BadgeService stub."""
         return IdentityServiceSdk.BadgeServiceStub(self.client.channel)
 
     def _get_auth_service(
-        self,
-    ) -> "outshift.identity.service.v1alpha1.AuthService":
+        self, ) -> "outshift.identity.service.v1alpha1.AuthService":
         """Return the AuthService stub."""
         return IdentityServiceSdk.AuthServiceStub(self.client.channel)
 
@@ -123,14 +120,11 @@ class IdentityServiceSdk:
                     app_id=agentic_service_id,
                     tool_name=tool_name,
                     user_token=user_token,
-                )
-            )
+                ))
 
             token_response = self._get_auth_service().Token(
                 IdentityServiceSdk.TokenRequest(
-                    authorization_code=auth_response.authorization_code,
-                )
-            )
+                    authorization_code=auth_response.authorization_code, ))
 
             return token_response.access_token
         except Exception as e:
@@ -149,11 +143,10 @@ class IdentityServiceSdk:
             IdentityServiceSdk.ExtAuthzRequest(
                 access_token=access_token,
                 tool_name=tool_name,
-            )
-        )
+            ))
 
     def verify_badge(
-        self, badge: str
+            self, badge: str
     ) -> "outshift.identity.service.v1alpha1.VerificationResult":
         """Verify a badge.
 
@@ -164,11 +157,10 @@ class IdentityServiceSdk:
             VerificationResult: The result of the verification.
         """
         return self.get_badge_service().VerifyBadge(
-            request=IdentityServiceSdk.VerifyBadgeRequest(badge=badge)
-        )
+            request=IdentityServiceSdk.VerifyBadgeRequest(badge=badge))
 
     async def averify_badge(
-        self, badge: str
+            self, badge: str
     ) -> "outshift.identity.service.v1alpha1.VerificationResult":
         """Verify a badge using async method.
 
@@ -179,8 +171,7 @@ class IdentityServiceSdk:
             VerificationResult: The result of the verification.
         """
         return await self.get_badge_service().VerifyBadge(
-            IdentityServiceSdk.VerifyBadgeRequest(badge=badge)
-        )
+            IdentityServiceSdk.VerifyBadgeRequest(badge=badge))
 
     def issue_badge(
         self,
@@ -206,8 +197,7 @@ class IdentityServiceSdk:
         claims = {}
 
         if service_type == AppType.Value(
-            "APP_TYPE_MCP_SERVER"
-        ):  # APP_TYPE_MCP_SERVER
+                "APP_TYPE_MCP_SERVER"):  # APP_TYPE_MCP_SERVER
             logger.debug(
                 f"[bold green]Discovering MCP server for {service_name} at {url}[/bold green]"
             )
@@ -219,8 +209,7 @@ class IdentityServiceSdk:
                 "schema_base64": base64.b64encode(schema.encode("utf-8")),
             }
         elif service_type == AppType.Value(
-            "APP_TYPE_AGENT_A2A"
-        ):  # APP_TYPE_AGENT_A2A
+                "APP_TYPE_AGENT_A2A"):  # APP_TYPE_AGENT_A2A
             logger.debug(
                 f"[bold green]Discovering A2A agent for {service_name} at [bold blue]{url}[/bold blue][/bold green]"
             )
@@ -239,10 +228,8 @@ class IdentityServiceSdk:
 
         # Issue the badge
         self.get_badge_service().IssueBadge(
-            request=IdentityServiceSdk.IssueBadgeRequest(
-                app_id=service_id, **claims
-            )
-        )
+            request=IdentityServiceSdk.IssueBadgeRequest(app_id=service_id,
+                                                         **claims))
 
     async def aissue_badge(
         self,
@@ -268,8 +255,7 @@ class IdentityServiceSdk:
         claims = {}
 
         if service_type == AppType.Value(
-            "APP_TYPE_MCP_SERVER"
-        ):  # APP_TYPE_MCP_SERVER
+                "APP_TYPE_MCP_SERVER"):  # APP_TYPE_MCP_SERVER
             logger.debug(
                 f"[bold green]Discovering MCP server for {service_name} at {url}[/bold green]"
             )
@@ -281,8 +267,7 @@ class IdentityServiceSdk:
                 "schema_base64": base64.b64encode(schema.encode("utf-8")),
             }
         elif service_type == AppType.Value(
-            "APP_TYPE_AGENT_A2A"
-        ):  # APP_TYPE_AGENT_A2A
+                "APP_TYPE_AGENT_A2A"):  # APP_TYPE_AGENT_A2A
             logger.debug(
                 f"[bold green]Discovering A2A agent for {service_name} at [bold blue]{url}[/bold blue][/bold green]"
             )
@@ -301,7 +286,5 @@ class IdentityServiceSdk:
 
         # Issue the badge
         await self.get_badge_service().IssueBadge(
-            request=IdentityServiceSdk.IssueBadgeRequest(
-                app_id=service_id, **claims
-            )
-        )
+            request=IdentityServiceSdk.IssueBadgeRequest(app_id=service_id,
+                                                         **claims))

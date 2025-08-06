@@ -13,6 +13,7 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request
 from starlette.responses import JSONResponse, PlainTextResponse
 
+
 logger = logging.getLogger("identityservice.auth.starlette")
 
 
@@ -48,8 +49,7 @@ class IdentityServiceMiddleware(BaseHTTPMiddleware):
             access_token = self._parse_access_token(request)
         except Exception as e:
             return self._unauthorized(
-                "Missing or malformed Authorization header.", request
-            )
+                "Missing or malformed Authorization header.", request)
 
         try:
             # Authorize the access token
@@ -78,9 +78,11 @@ class IdentityServiceMiddleware(BaseHTTPMiddleware):
                 status_code=403,
                 media_type="text/event-stream",
             )
-        return JSONResponse(
-            {"error": "forbidden", "reason": reason}, status_code=403
-        )
+        return JSONResponse({
+            "error": "forbidden",
+            "reason": reason
+        },
+                            status_code=403)
 
     def _unauthorized(self, reason: str, request: Request):
         """Return a 401 Unauthorized response."""
@@ -91,9 +93,11 @@ class IdentityServiceMiddleware(BaseHTTPMiddleware):
                 status_code=401,
                 media_type="text/event-stream",
             )
-        return JSONResponse(
-            {"error": "unauthorized", "reason": reason}, status_code=401
-        )
+        return JSONResponse({
+            "error": "unauthorized",
+            "reason": reason
+        },
+                            status_code=401)
 
 
 class IdentityServiceA2AMiddleware(IdentityServiceMiddleware):
@@ -111,8 +115,7 @@ class IdentityServiceA2AMiddleware(IdentityServiceMiddleware):
 
         if self.agent_card is None:
             raise ValueError(
-                "AgentCard must be provided to IdentityServiceMiddleware."
-            )
+                "AgentCard must be provided to IdentityServiceMiddleware.")
 
         if self.agent_card.securitySchemes is None:
             raise ValueError(
@@ -172,8 +175,7 @@ class IdentityServiceMCPMiddleware(IdentityServiceMiddleware):
             access_token = self._parse_access_token(request)
         except Exception as e:
             return self._unauthorized(
-                "Missing or malformed Authorization header.", request
-            )
+                "Missing or malformed Authorization header.", request)
 
         try:
             # Authorize the access token for the specific tool

@@ -11,6 +11,7 @@ from dotenv import load_dotenv
 
 from identityservice import constant
 
+
 logger = logging.getLogger("identityservice.client")
 
 

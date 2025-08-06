@@ -7,6 +7,7 @@ from identityservice.sdk import IdentityServiceSdk as Sdk
 from rich import print
 from typing_extensions import Annotated
 
+
 app = typer.Typer()
 
 
