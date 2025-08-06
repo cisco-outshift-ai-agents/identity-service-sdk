@@ -1,3 +1,4 @@
+# pylint: disable=broad-except, too-few-public-methods
 # Copyright 2025 Cisco Systems, Inc. and its affiliates
 # SPDX-License-Identifier: Apache-2.0
 """Middleware for Starlette that authenticates the Identity Service bearer token."""
@@ -13,7 +14,6 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request
 from starlette.responses import JSONResponse, PlainTextResponse
 
-
 logger = logging.getLogger("identityservice.auth.starlette")
 
 
@@ -23,7 +23,7 @@ class IdentityServiceMiddleware(BaseHTTPMiddleware):
     def __init__(
         self,
         app: Starlette,
-        public_paths: list[str] = [],
+        public_paths: list[str] | None = None,
     ):
         """Initialize the middleware."""
         super().__init__(app)
@@ -35,7 +35,7 @@ class IdentityServiceMiddleware(BaseHTTPMiddleware):
         path = request.url.path
 
         # Allow public paths
-        if path in self.public_paths:
+        if self.public_paths and path in self.public_paths:
             return await call_next(request)
 
         logger.debug(
@@ -47,9 +47,10 @@ class IdentityServiceMiddleware(BaseHTTPMiddleware):
         # Get access token from the request
         try:
             access_token = self._parse_access_token(request)
-        except Exception as e:
+        except Exception as _:
             return self._unauthorized(
-                "Missing or malformed Authorization header.", request)
+                "Missing or malformed Authorization header.", request
+            )
 
         try:
             # Authorize the access token
@@ -78,11 +79,9 @@ class IdentityServiceMiddleware(BaseHTTPMiddleware):
                 status_code=403,
                 media_type="text/event-stream",
             )
-        return JSONResponse({
-            "error": "forbidden",
-            "reason": reason
-        },
-                            status_code=403)
+        return JSONResponse(
+            {"error": "forbidden", "reason": reason}, status_code=403
+        )
 
     def _unauthorized(self, reason: str, request: Request):
         """Return a 401 Unauthorized response."""
@@ -93,11 +92,9 @@ class IdentityServiceMiddleware(BaseHTTPMiddleware):
                 status_code=401,
                 media_type="text/event-stream",
             )
-        return JSONResponse({
-            "error": "unauthorized",
-            "reason": reason
-        },
-                            status_code=401)
+        return JSONResponse(
+            {"error": "unauthorized", "reason": reason}, status_code=401
+        )
 
 
 class IdentityServiceA2AMiddleware(IdentityServiceMiddleware):
@@ -107,7 +104,7 @@ class IdentityServiceA2AMiddleware(IdentityServiceMiddleware):
         self,
         app: Starlette,
         agent_card: AgentCard | None = None,
-        public_paths: list[str] = [],
+        public_paths: list[str] | None = None,
     ):
         """Initialize the middleware."""
         super().__init__(app, public_paths)
@@ -115,14 +112,16 @@ class IdentityServiceA2AMiddleware(IdentityServiceMiddleware):
 
         if self.agent_card is None:
             raise ValueError(
-                "AgentCard must be provided to IdentityServiceMiddleware.")
+                "AgentCard must be provided to IdentityServiceMiddleware."
+            )
 
         if self.agent_card.securitySchemes is None:
             raise ValueError(
                 "AgentCard must have securitySchemes defined for IdentityServiceMiddleware."
             )
 
-        # Process the Security Requirements Object to make sure that the IdentityServiceAuthScheme is used
+        # Process the Security Requirements Object to make sure
+        # that the IdentityServiceAuthScheme is used
         for sec_scheme in self.agent_card.securitySchemes.values():
             if isinstance(sec_scheme.root, HTTPAuthSecurityScheme):
                 if sec_scheme.root.scheme != "bearer":
@@ -173,9 +172,10 @@ class IdentityServiceMCPMiddleware(IdentityServiceMiddleware):
         # Get access token from the request
         try:
             access_token = self._parse_access_token(request)
-        except Exception as e:
+        except Exception as _:
             return self._unauthorized(
-                "Missing or malformed Authorization header.", request)
+                "Missing or malformed Authorization header.", request
+            )
 
         try:
             # Authorize the access token for the specific tool

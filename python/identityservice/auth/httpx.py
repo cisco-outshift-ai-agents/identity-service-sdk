@@ -8,7 +8,6 @@ from identityservice.sdk import IdentityServiceSdk as Sdk
 
 import httpx
 
-
 logger = logging.getLogger("identityservice.auth.httpx")
 
 

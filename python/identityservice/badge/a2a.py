@@ -1,9 +1,9 @@
+# pylint: disable=broad-exception-raised
 # Copyright 2025 Cisco Systems, Inc. and its affiliates
 # SPDX-License-Identifier: Apache-2.0
 """MCP Discover for the Identity Service Python SDK."""
 
 import httpx
-
 
 A2A_WELL_KNOWN_URL = "/.well-known/agent.json"
 
