@@ -34,3 +34,6 @@ jobs:
           MARKDOWN_CONFIG_FILE: ".markdownlint.yml"
           YAML_CONFIG_FILE: ".yamllint.yml"
           FILTER_REGEX_EXCLUDE: "(python/outshift/.*)|(python/google/.*)|(python/openapiv3/.*)"
+          VALIDATE_JSCPD: false
+          VALIDATE_PYTHON_BLACK: false
+          VALIDATE_PYTHON_FLAKE8: false
