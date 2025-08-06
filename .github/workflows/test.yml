@@ -14,7 +14,3 @@ on:
 
 # Declare default permissions as read-only
 permissions: read-all
-
-jobs:
-  pre-release-test:
-    uses: ./.github/workflows/reusable-test.yml
