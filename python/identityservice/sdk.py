@@ -1,3 +1,4 @@
+# pylint: disable=logging-fstring-interpolation, no-member, no-name-in-module
 # Copyright 2025 Cisco Systems, Inc. and its affiliates
 # SPDX-License-Identifier: Apache-2.0
 """Identity Service SDK for Python."""
@@ -95,7 +96,7 @@ class IdentityServiceSdk:
         """Return the BadgeService stub."""
         return IdentityServiceSdk.BadgeServiceStub(self.client.channel)
 
-    def _get_auth_service(
+    def get_auth_service(
         self,
     ) -> "outshift.identity.service.v1alpha1.AuthService":
         """Return the AuthService stub."""
@@ -118,7 +119,7 @@ class IdentityServiceSdk:
             str: The issued access token.
         """
         try:
-            auth_response = self._get_auth_service().Authorize(
+            auth_response = self.get_auth_service().Authorize(
                 IdentityServiceSdk.AuthorizeRequest(
                     app_id=agentic_service_id,
                     tool_name=tool_name,
@@ -126,7 +127,7 @@ class IdentityServiceSdk:
                 )
             )
 
-            token_response = self._get_auth_service().Token(
+            token_response = self.get_auth_service().Token(
                 IdentityServiceSdk.TokenRequest(
                     authorization_code=auth_response.authorization_code,
                 )
@@ -135,7 +136,8 @@ class IdentityServiceSdk:
             return token_response.access_token
         except Exception as e:
             raise RuntimeError(
-                f"Failed to authorize agentic service {agentic_service_id} with tool {tool_name}: {e}"
+                f"""Failed to authorize agentic service {agentic_service_id}
+                with tool {tool_name}: {e}"""
             ) from e
 
     def authorize(self, access_token: str, tool_name: str | None = None):
@@ -145,7 +147,7 @@ class IdentityServiceSdk:
             access_token (str): The access token to authorize with.
             tool_name (str | None): The name of the tool to authorize for.
         """
-        return self._get_auth_service().ExtAuthz(
+        return self.get_auth_service().ExtAuthz(
             IdentityServiceSdk.ExtAuthzRequest(
                 access_token=access_token,
                 tool_name=tool_name,
@@ -192,7 +194,7 @@ class IdentityServiceSdk:
             url (str): The URL of the agentic service to issue a badge for.
         """
         # Fetch the agentic service
-        app_info = self._get_auth_service().AppInfo(self.empty_request())
+        app_info = self.get_auth_service().AppInfo(self.empty_request())
 
         # Get name and type
         service_name = app_info.app.name
@@ -222,7 +224,8 @@ class IdentityServiceSdk:
             "APP_TYPE_AGENT_A2A"
         ):  # APP_TYPE_AGENT_A2A
             logger.debug(
-                f"[bold green]Discovering A2A agent for {service_name} at [bold blue]{url}[/bold blue][/bold green]"
+                f"""[bold green]Discovering A2A agent for {service_name} at
+                [bold blue]{url}[/bold blue][/bold green]"""
             )
 
             # Discover the A2A agent
@@ -254,7 +257,7 @@ class IdentityServiceSdk:
             url (str): The URL of the agentic service to issue a badge for.
         """
         # Fetch the agentic service
-        app_info = await self._get_auth_service().AppInfo(self.empty_request())
+        app_info = await self.get_auth_service().AppInfo(self.empty_request())
 
         # Get name and type
         service_name = app_info.app.name
@@ -284,7 +287,8 @@ class IdentityServiceSdk:
             "APP_TYPE_AGENT_A2A"
         ):  # APP_TYPE_AGENT_A2A
             logger.debug(
-                f"[bold green]Discovering A2A agent for {service_name} at [bold blue]{url}[/bold blue][/bold green]"
+                f"""[bold green]Discovering A2A agent for {service_name} at
+                [bold blue]{url}[/bold blue][/bold green]"""
             )
 
             # Discover the A2A agent

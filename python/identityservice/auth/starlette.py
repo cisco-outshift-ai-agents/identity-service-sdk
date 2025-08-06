@@ -1,3 +1,4 @@
+# pylint: disable=broad-except, too-few-public-methods
 # Copyright 2025 Cisco Systems, Inc. and its affiliates
 # SPDX-License-Identifier: Apache-2.0
 """Middleware for Starlette that authenticates the Identity Service bearer token."""
@@ -22,7 +23,7 @@ class IdentityServiceMiddleware(BaseHTTPMiddleware):
     def __init__(
         self,
         app: Starlette,
-        public_paths: list[str] = [],
+        public_paths: list[str] | None = None,
     ):
         """Initialize the middleware."""
         super().__init__(app)
@@ -34,7 +35,7 @@ class IdentityServiceMiddleware(BaseHTTPMiddleware):
         path = request.url.path
 
         # Allow public paths
-        if path in self.public_paths:
+        if self.public_paths and path in self.public_paths:
             return await call_next(request)
 
         logger.debug(
@@ -46,7 +47,7 @@ class IdentityServiceMiddleware(BaseHTTPMiddleware):
         # Get access token from the request
         try:
             access_token = self._parse_access_token(request)
-        except Exception as e:
+        except Exception as _:
             return self._unauthorized(
                 "Missing or malformed Authorization header.", request
             )
@@ -103,7 +104,7 @@ class IdentityServiceA2AMiddleware(IdentityServiceMiddleware):
         self,
         app: Starlette,
         agent_card: AgentCard | None = None,
-        public_paths: list[str] = [],
+        public_paths: list[str] | None = None,
     ):
         """Initialize the middleware."""
         super().__init__(app, public_paths)
@@ -119,7 +120,8 @@ class IdentityServiceA2AMiddleware(IdentityServiceMiddleware):
                 "AgentCard must have securitySchemes defined for IdentityServiceMiddleware."
             )
 
-        # Process the Security Requirements Object to make sure that the IdentityServiceAuthScheme is used
+        # Process the Security Requirements Object to make sure
+        # that the IdentityServiceAuthScheme is used
         for sec_scheme in self.agent_card.securitySchemes.values():
             if isinstance(sec_scheme.root, HTTPAuthSecurityScheme):
                 if sec_scheme.root.scheme != "bearer":
@@ -170,7 +172,7 @@ class IdentityServiceMCPMiddleware(IdentityServiceMiddleware):
         # Get access token from the request
         try:
             access_token = self._parse_access_token(request)
-        except Exception as e:
+        except Exception as _:
             return self._unauthorized(
                 "Missing or malformed Authorization header.", request
             )

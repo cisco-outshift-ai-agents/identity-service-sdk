@@ -22,11 +22,14 @@ class Client:  # pylint: disable=too-few-public-methods
         load_dotenv()
 
         # Get credentials
-        grpc_server_url = os.environ.get("IDENTITY_SERVICE_GRPC_SERVER_URL",
-                                         constant.DEFAULT_GRPC_URL)
+        grpc_server_url = os.environ.get(
+            "IDENTITY_SERVICE_GRPC_SERVER_URL", constant.DEFAULT_GRPC_URL
+        )
         call_credentials = grpc.metadata_call_credentials(
             lambda _, callback: callback(
-                ((constant.API_KEY_KEY, api_key), ), None))
+                ((constant.API_KEY_KEY, api_key),), None
+            )
+        )
         logger.debug("Connecting to %s", grpc_server_url)
 
         # Options
@@ -57,21 +60,25 @@ class Client:  # pylint: disable=too-few-public-methods
         if use_ssl == 1:
             if use_insecure == 1:
                 root_cert = base64.b64decode(
-                    os.environ["IDENTITY_SERVICE_INSECURE_ROOT_CA"])
+                    os.environ["IDENTITY_SERVICE_INSECURE_ROOT_CA"]
+                )
                 channel_credentials = grpc.ssl_channel_credentials(
-                    root_certificates=root_cert)
+                    root_certificates=root_cert
+                )
             else:
                 channel_credentials = grpc.ssl_channel_credentials()
         else:
             logger.debug("Using local credentials")
 
         # Set if async
-        secure_channel = (grpc.aio.secure_channel
-                          if async_mode else grpc.secure_channel)
+        secure_channel = (
+            grpc.aio.secure_channel if async_mode else grpc.secure_channel
+        )
 
         self.channel = secure_channel(
             grpc_server_url,
-            grpc.composite_channel_credentials(channel_credentials,
-                                               call_credentials),
+            grpc.composite_channel_credentials(
+                channel_credentials, call_credentials
+            ),
             options=options,
         )

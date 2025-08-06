@@ -1,3 +1,4 @@
+# pylint: disable=broad-except, too-few-public-methods, import-self, no-name-in-module, import-error
 # Copyright 2025 Cisco Systems, Inc. and its affiliates
 # SPDX-License-Identifier: Apache-2.0
 """MCP Discover for the Identity Service Python SDK."""
@@ -47,7 +48,7 @@ class McpServer:
         self.tools = tools
         self.resources = resources
 
-    def toJSON(self):
+    def to_json(self):
         """Convert the McpServer instance to a JSON string."""
         return json.dumps(
             self, default=lambda o: o.__dict__, sort_keys=True, indent=4
@@ -108,7 +109,7 @@ async def discover(name: str, url: str) -> str:
                     url=url,
                     tools=available_tools,
                     resources=available_resources,
-                ).toJSON()
+                ).to_json()
 
     except Exception as err:
         raise err

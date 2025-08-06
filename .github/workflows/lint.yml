@@ -33,25 +33,4 @@ jobs:
           LINTER_RULES_PATH: ".github/linters"
           MARKDOWN_CONFIG_FILE: ".markdownlint.yml"
           YAML_CONFIG_FILE: ".yamllint.yml"
-          GO_CONFIG_FILE: ".golangci.yaml"
-          PROTOBUF_CONFIG_FILE: ".protolintrc.yml"
-          FILTER_REGEX_EXCLUDE: "(.*/charts/.*)|(sdk/python/agntcy/.*)|(sdk/python/google/.*)|(sdk/python/openapiv3/.*)"
-          VALIDATE_ALL_CODEBASE: false
-          VALIDATE_MARKDOWN_PRETTIER: false
-          VALIDATE_YAML_PRETTIER: false
-          VALIDATE_NATURAL_LANGUAGE: false
-          VALIDATE_JSCPD: false
-          VALIDATE_CHECKOV: false
-          VALIDATE_GO: false
-          VALIDATE_ENV: false
-          VALIDATE_SHELL_SHFMT: false
-          VALIDATE_PYTHON_BLACK: false
-          VALIDATE_PYTHON_PYINK: false
-          VALIDATE_PYTHON_ISORT: false
-          MULTI_STATUS: false
-          VALIDATE_JSON_PRETTIER: false
-          VALIDATE_CSS: false
-          VALIDATE_CSS_PRETTIER: false
-          VALIDATE_TYPESCRIPT_STANDARD: false
-          VALIDATE_TYPESCRIPT_ES: false
-          VALIDATE_TSX: false
+          FILTER_REGEX_EXCLUDE: "(python/outshift/.*)|(python/google/.*)|(python/openapiv3/.*)"
