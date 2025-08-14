@@ -3,10 +3,10 @@
 # SPDX-License-Identifier: Apache-2.0
 """Middleware for Starlette that authenticates the Identity Service bearer token."""
 
-import json
 import logging
 
 from a2a.types import AgentCard, HTTPAuthSecurityScheme
+from identityservice.auth.common import get_mcp_request_tool_name
 from identityservice.sdk import IdentityServiceSdk as Sdk
 
 from starlette.applications import Starlette
@@ -137,8 +137,6 @@ class IdentityServiceA2AMiddleware(IdentityServiceMiddleware):
 class IdentityServiceMCPMiddleware(IdentityServiceMiddleware):
     """Starlette middleware that authenticates MCP access using an OAuth2 bearer token."""
 
-    PROTECTED_CALLS = ["tools/call", "resources/read"]
-
     def __init__(
         self,
         app: Starlette,
@@ -152,15 +150,17 @@ class IdentityServiceMCPMiddleware(IdentityServiceMiddleware):
         body = await request.body()
 
         try:
-            # Authorize the call tool only
-            jsonrpc_request = json.loads(body)
-
-            # Allow non protected methods
-            if jsonrpc_request.get("method") not in self.PROTECTED_CALLS:
-                return await call_next(request)
-
             # Get the tool name
-            tool_name = jsonrpc_request["params"]["name"]
+            tool_name = get_mcp_request_tool_name(body)
+
+            logger.debug(
+                "Parsed MCP request with tool name: %s",
+                tool_name,
+            )
+
+            if tool_name is None:
+                # If the tool name is not found, allow the request to pass through
+                return await call_next(request)
         except Exception as e:
             return self._forbidden(f"Authentication failed: {e}", request)
 
