@@ -115,20 +115,28 @@ class IdentityServiceA2AMiddleware(IdentityServiceMiddleware):
                 "AgentCard must be provided to IdentityServiceMiddleware."
             )
 
-        if self.agent_card.securitySchemes is None:
+        security_schemes = self.agent_card.security_schemes
+        if hasattr(self.agent_card, "securitySchemes"):
+            security_schemes = self.agent_card.securitySchemes
+
+        if security_schemes is None:
             raise ValueError(
                 "AgentCard must have securitySchemes defined for IdentityServiceMiddleware."
             )
 
         # Process the Security Requirements Object to make sure
         # that the IdentityServiceAuthScheme is used
-        for sec_scheme in self.agent_card.securitySchemes.values():
+        for sec_scheme in security_schemes.values():
             if isinstance(sec_scheme.root, HTTPAuthSecurityScheme):
                 if sec_scheme.root.scheme != "bearer":
                     raise ValueError(
                         "IdentityServiceMiddleware requires a bearer token scheme."
                     )
-                if sec_scheme.root.bearerFormat != "JWT":
+                bearer_format = sec_scheme.root.bearer_format
+                if hasattr(sec_scheme.root, "bearerFormat"):
+                    bearer_format = sec_scheme.root.bearerFormat
+
+                if bearer_format != "JWT":
                     raise ValueError(
                         "IdentityServiceMiddleware requires a JWT bearer format."
                     )
