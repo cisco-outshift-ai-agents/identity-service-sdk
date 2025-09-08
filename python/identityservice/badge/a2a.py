@@ -28,11 +28,11 @@ async def adiscover(well_known_url):
     """Fetch the agent card from the well-known URL asynchronously."""
     # Try V3 first, then fallback to V2
     try:
-        return _adiscover(well_known_url, A2A_WELL_KNOWN_URL_V3)
+        return await _adiscover(well_known_url, A2A_WELL_KNOWN_URL_V3)
     except Exception:  # pylint: disable=broad-except
         logger.warning("Failed to fetch V3 agent card, falling back to V2")
 
-        return _adiscover(well_known_url, A2A_WELL_KNOWN_URL_V2)
+        return await _adiscover(well_known_url, A2A_WELL_KNOWN_URL_V2)
 
 
 def _discover(well_known_url, url):
