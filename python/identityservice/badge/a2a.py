@@ -3,16 +3,43 @@
 # SPDX-License-Identifier: Apache-2.0
 """MCP Discover for the Identity Service Python SDK."""
 
+import logging
+
 import httpx
 
-A2A_WELL_KNOWN_URL = "/.well-known/agent.json"
+A2A_WELL_KNOWN_URL_V2 = "/.well-known/agent.json"
+A2A_WELL_KNOWN_URL_V3 = "/.well-known/agent-card.json"
+
+logger = logging.getLogger("identityservice.badge.a2a")
 
 
 def discover(well_known_url):
     """Fetch the agent card from the well-known URL."""
+    # Try V3 first, then fallback to V2
+    try:
+        return _discover(well_known_url, A2A_WELL_KNOWN_URL_V3)
+    except Exception:  # pylint: disable=broad-except
+        logger.warning("Failed to fetch V3 agent card, falling back to V2")
+
+        return _discover(well_known_url, A2A_WELL_KNOWN_URL_V2)
+
+
+async def adiscover(well_known_url):
+    """Fetch the agent card from the well-known URL asynchronously."""
+    # Try V3 first, then fallback to V2
+    try:
+        return _adiscover(well_known_url, A2A_WELL_KNOWN_URL_V3)
+    except Exception:  # pylint: disable=broad-except
+        logger.warning("Failed to fetch V3 agent card, falling back to V2")
+
+        return _adiscover(well_known_url, A2A_WELL_KNOWN_URL_V2)
+
+
+def _discover(well_known_url, url):
+    """Fetch the agent card from the well-known URL."""
     # Ensure the URL ends with a trailing slash
-    if not well_known_url.endswith(A2A_WELL_KNOWN_URL):
-        well_known_url = well_known_url.rstrip("/") + A2A_WELL_KNOWN_URL
+    if not well_known_url.endswith(url):
+        well_known_url = well_known_url.rstrip("/") + url
 
     try:
         # Perform the GET request
@@ -32,11 +59,11 @@ def discover(well_known_url):
         raise e
 
 
-async def adiscover(well_known_url):
+async def _adiscover(well_known_url, url):
     """Fetch the agent card from the well-known URL."""
     # Ensure the URL ends with a trailing slash
-    if not well_known_url.endswith(A2A_WELL_KNOWN_URL):
-        well_known_url = well_known_url.rstrip("/") + A2A_WELL_KNOWN_URL
+    if not well_known_url.endswith(url):
+        well_known_url = well_known_url.rstrip("/") + url
 
     try:
         # Perform the GET request
