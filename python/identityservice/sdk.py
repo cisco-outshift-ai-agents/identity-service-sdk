@@ -102,11 +102,41 @@ class IdentityServiceSdk:
         """Return the AuthService stub."""
         return IdentityServiceSdk.AuthServiceStub(self.client.channel)
 
+    def pre_authorize(
+        self,
+        agentic_service_id: str | None = None,
+        prompt: str | None = None,
+    ):
+        """Preauthorizes an agentic service and returns a preauthorization code.
+
+        Parameters:
+            agentic_service_id (str | None): The ID of the Agentic Service to preauthorize for.
+            prompt (str | None): The prompt to use for the preauthorization.
+
+        Returns:
+            str: The preauthorization code.
+        """
+        try:
+            auth_response = self.get_auth_service().Authorize(
+                IdentityServiceSdk.AuthorizeRequest(
+                    resolver_metadata_id=agentic_service_id,
+                    prompt=prompt,
+                )
+            )
+
+            return auth_response.authorization_code
+        except Exception as e:
+            raise RuntimeError(
+                f"""Failed to preauthorize agentic service {agentic_service_id}
+                with prompt {prompt}: {e}"""
+            ) from e
+
     def access_token(
         self,
         agentic_service_id: str | None = None,
         tool_name: str | None = None,
         user_token: str | None = None,
+        pre_authorization_code: str | None = None,
     ) -> str | None:
         """Authorizes an agentic service and returns an access token.
 
@@ -114,6 +144,7 @@ class IdentityServiceSdk:
             agentic_service_id (str | None): The ID of the Agentic Service to authorize for.
             tool_name (str | None): The name of the tool to authorize for.
             user_token (str | None): The user token to use for the token.
+            pre_authorization_code (str | None): The preauthorization code to use for the token.
 
         Returns:
             str: The issued access token.
@@ -121,7 +152,8 @@ class IdentityServiceSdk:
         try:
             auth_response = self.get_auth_service().Authorize(
                 IdentityServiceSdk.AuthorizeRequest(
-                    app_id=agentic_service_id,
+                    authorization_code=pre_authorization_code,
+                    resolver_metadata_id=agentic_service_id,
                     tool_name=tool_name,
                     user_token=user_token,
                 )
@@ -140,17 +172,24 @@ class IdentityServiceSdk:
                 with tool {tool_name}: {e}"""
             ) from e
 
-    def authorize(self, access_token: str, tool_name: str | None = None):
+    def authorize(
+        self,
+        access_token: str,
+        tool_name: str | None = None,
+        prompt: str | None = None,
+    ):
         """Authorize an agentic service with an access token.
 
         Parameters:
             access_token (str): The access token to authorize with.
             tool_name (str | None): The name of the tool to authorize for.
+            prompt (str | None): The prompt to use for the authorization.
         """
         return self.get_auth_service().ExtAuthz(
             IdentityServiceSdk.ExtAuthzRequest(
                 access_token=access_token,
                 tool_name=tool_name,
+                prompt=prompt,
             )
         )
 

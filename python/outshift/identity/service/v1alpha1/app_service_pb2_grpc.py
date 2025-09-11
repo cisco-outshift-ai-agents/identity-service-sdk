@@ -62,6 +62,11 @@ class AppServiceStub(object):
                 request_serializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_app__service__pb2.DeleteAppRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 _registered_method=True)
+        self.RefreshAppApiKey = channel.unary_unary(
+                '/outshift.identity.service.v1alpha1.AppService/RefreshAppApiKey',
+                request_serializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_app__service__pb2.RefreshAppApiKeyRequest.SerializeToString,
+                response_deserializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_app__pb2.App.FromString,
+                _registered_method=True)
         self.GetBadge = channel.unary_unary(
                 '/outshift.identity.service.v1alpha1.AppService/GetBadge',
                 request_serializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_app__service__pb2.GetBadgeRequest.SerializeToString,
@@ -120,6 +125,13 @@ class AppServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def RefreshAppApiKey(self, request, context):
+        """Refresh the api-key for an App.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def GetBadge(self, request, context):
         """Get the current badge issued for the App.
         """
@@ -166,6 +178,11 @@ def add_AppServiceServicer_to_server(servicer, server):
                     servicer.DeleteApp,
                     request_deserializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_app__service__pb2.DeleteAppRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'RefreshAppApiKey': grpc.unary_unary_rpc_method_handler(
+                    servicer.RefreshAppApiKey,
+                    request_deserializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_app__service__pb2.RefreshAppApiKeyRequest.FromString,
+                    response_serializer=outshift_dot_identity_dot_service_dot_v1alpha1_dot_app__pb2.App.SerializeToString,
             ),
             'GetBadge': grpc.unary_unary_rpc_method_handler(
                     servicer.GetBadge,
@@ -341,6 +358,33 @@ class AppService(object):
             '/outshift.identity.service.v1alpha1.AppService/DeleteApp',
             outshift_dot_identity_dot_service_dot_v1alpha1_dot_app__service__pb2.DeleteAppRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RefreshAppApiKey(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/outshift.identity.service.v1alpha1.AppService/RefreshAppApiKey',
+            outshift_dot_identity_dot_service_dot_v1alpha1_dot_app__service__pb2.RefreshAppApiKeyRequest.SerializeToString,
+            outshift_dot_identity_dot_service_dot_v1alpha1_dot_app__pb2.App.FromString,
             options,
             channel_credentials,
             insecure,
